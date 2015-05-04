@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}{{  name }}{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    <style>
+        .hello{
+            text-align:center;
+        }
+        .name{
+            font-size: x-large;
+            color: #66dd66;
+            font-weight: bold;
+            text-align: center
+        }
+    </style>
+</head>
+<body style="background-color: slategray">
+{% block body %}
+<p class="hello">Hello <span class="name">{{ name }}</span></p>
+{% endblock %}
+{% block javascripts %}{% endblock %}
+</body>
+</html>

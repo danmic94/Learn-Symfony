@@ -25,3 +25,7 @@ add:
 hello:
     path: /hello
     defaults: { _controller: AdittionBundle:Adittion:hello}
+
+name:
+    path: /insertname/{name}
+    defaults: { _controller: AdittionBundle:Adittion:name}

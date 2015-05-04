@@ -20,4 +20,12 @@ class   AdittionController extends Controller
     {
         return new Response('Whaddap Dude!');
     }
+
+
+    public function nameAction($name)
+    {
+        return $this->render('hello/index.html.twig', array(
+            'name'=> $name
+        ));
+    }
 }
