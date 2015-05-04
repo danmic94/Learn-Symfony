@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href='http://fonts.googleapis.com/css?family=Arvo:400,700italic' rel='stylesheet' type='text/css'>
+    <meta charset="UTF-8" />
+    <title>{% block title %}{{  number }}{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    <style>
+        body{
+            background-color: #aaaaaa
+        }
+        p{
+            text-align: center;
+            color:azure;
+            font-weight: bold;
+            font-family: 'Arvo', serif;
+            font-size: 150px;
+            margin-top: 15%
+        }
+    </style>
+</head>
+<body>
+{% block body %}
+    <p>Number: {{ number }}</p>
+{% endblock %}
+{% block javascripts %}{% endblock %}
+</body>
+</html>

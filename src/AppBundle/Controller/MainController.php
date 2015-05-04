@@ -14,8 +14,9 @@ class   MainController extends Controller
     }
 
     public function randomizeAction($limit){
-        return new Response(
-            '<html><body style="background-color: #aaaaaa"><p style="text-align: center;color: #66dd66;font-weight: bold;font-family: Helvetica; font-size: 150px;margin-top: 15%">Number: '.rand(1,$limit).'</p></body></html>'
-        );
+        $number = rand(1,$limit);
+        return $this->render('random/index.html.twig', array(
+            'number'=> $number
+        ));
     }
 }
