@@ -1,0 +1,27 @@
+app:
+    resource: "@AdittionBundle/Controller/"
+    type:     annotation
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+# app/config/routing.yml
+contact:
+    path: /contact
+    defaults: { _controller: AppBundle:Main:contact}
+
+# src/Acme/DemoBundle/Resources/config/routing.yml:
+randomize:
+    path: /rand/{limit}
+    defaults: { _controller: AppBundle:Main:randomize}
+
+
+# src/AdittionBundle/Resources/config/routing.yml:
+add:
+    path: /add/{a}-{b}
+    defaults: { _controller: AdittionBundle:Adittion:add}
+
+hello:
+    path: /hello
+    defaults: { _controller: AdittionBundle:Adittion:hello}
