@@ -29,3 +29,13 @@ hello:
 name:
     path: /insertname/{name}
     defaults: { _controller: AdittionBundle:Adittion:name}
+
+# app/config/routing.yml
+_welcome:
+    path: /
+    defaults: { _controller: AppBundle:Welcome:index}
+
+# app/config/routing.yml
+article_show:
+     path: /article/{slug}
+     defaults: { _controller: AppBundle:Article:show }

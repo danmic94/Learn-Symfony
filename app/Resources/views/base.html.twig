@@ -1,13 +1,33 @@
+{# app/Resources/views/base.html.twig #}
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
-</html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    {% block stylesheets %}
+        <link href="{{ assets('css/main.css') }}" rel="stylesheet" />
+    {% endblock %}
+    <title>{% block title %}Test Application{% endblock %}</title>
+</head>
+<body>
+<div id="sidebar">
+
+    {{ render(controller(
+    'AcmeArticleBundle:Article:recentArticles',
+    { 'max': 3 }
+    )) }}
+
+    {% block sidebar %}
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/blog">Blog</a></li>
+        </ul>
+    {% endblock %}
+</div>
+<div id="content">
+    {% block body %}{% endblock %}
+</div>
+
+    {% block javascripts %}
+        <script src="{{ assets('js/main.js') }}"></script>
+    {% endblock %}
+</body>
