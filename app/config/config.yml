@@ -71,14 +71,3 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
-
-# app/config/config.yml
-framework:
-    # ...
-    fragments: { path: /_fragment }
-
-# app/config/config.yml
-framework:
-# ...
-templating:
-            hinclude_default_template: hinclude.html.twig
