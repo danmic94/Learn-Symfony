@@ -5,7 +5,8 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Product;
-use Symfony\Component\BrowserKit\Response;
+use Symfony\Component\HttpFoundation\Response;
+
 
 class DefaultController extends Controller
 {
@@ -29,6 +30,8 @@ class DefaultController extends Controller
         $em->persist($product);
         $em->flush();
 
-        return new Response('Creted product id '.$product->getId());
+
+        //returns response that the query created new entry in db
+        return new Response('Created product id' .$product->getId());
     }
 }

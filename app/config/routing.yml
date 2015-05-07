@@ -38,4 +38,9 @@ _welcome:
 # app/config/routing.yml
 article_show:
      path: /article/{slug}
-     defaults: { _controller: AppBundle:Article:show }
+     defaults: { _controller: AppBundle:Article:show}
+
+# src/AppBundle/DefaultController
+create_entry:
+     path: /create
+     defaults: { _controller: AppBundle:Default:create}
