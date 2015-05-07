@@ -34,4 +34,19 @@ class DefaultController extends Controller
         //returns response that the query created new entry in db
         return new Response('Created product id' .$product->getId());
     }
+    public function showAction($id)
+    {
+        $product = $this->getDoctrine()
+            ->getRepository('AppBundle:Product')
+            ->find($id);
+
+        if (!$product) {
+            throw $this->createNotFoundException(
+                'No product found for id'.$id
+            );
+        }
+        return $this->render('dbactions/index.html.twig', array(
+            'product'=>$product
+        ));
+    }
 }
