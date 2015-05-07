@@ -46,6 +46,6 @@ create_entry:
      defaults: { _controller: AppBundle:Default:create}
 
 # src/AppBundle/DefultController and view app/Resources/views/dbactions
-create_entry:
-     path: /show?{id}
+show_entry:
+     path: /show/{id}
      defaults: { _controller: AppBundle:Default:show}

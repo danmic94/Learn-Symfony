@@ -17,6 +17,7 @@ class DefaultController extends Controller
     {
         return $this->render('default/index.html.twig');
     }
+
     //This creates a new entry in the data base
     public function createAction()
     {
@@ -34,19 +35,54 @@ class DefaultController extends Controller
         //returns response that the query created new entry in db
         return new Response('Created product id' .$product->getId());
     }
-    public function showAction($id)
-    {
-        $product = $this->getDoctrine()
-            ->getRepository('AppBundle:Product')
-            ->find($id);
+        public function showAction($id)
+        {
+            $id = intval($id);
+            $repository = $this->getDoctrine()->getRepository('AppBundle:Product');
+            $product = $repository->find($id);
 
-        if (!$product) {
-            throw $this->createNotFoundException(
-                'No product found for id'.$id
-            );
+            if (isset($product) === FALSE) {
+                return $this->render('dbactions/error.html.twig', array(
+                    'product' => $product
+                ));
+            }
+
+                return $this->render('dbactions/index.html.twig', array(
+                    'product' => $product
+            ));
         }
-        return $this->render('dbactions/index.html.twig', array(
-            'product'=>$product
-        ));
+
+        public function updateAction($id)
+        {
+            $em = $this->getDoctrine()->getManager();
+            $product = $em->getRepository('AppBundleProduct')->find($id);
+
+            if(!$product) {
+                throw $this->createNotFoundException(
+                    'No product found for id '.$id
+                );
+            }
+            $product->setName('New product name!');
+            $em->flush();
+
+            return $this->redirectToRoute('homepage');
+        }
+
+        public function deleteAction($id)
+        {
+            $em = $this->getDoctrine()->getManager();
+            $product = $em->getRepository('AppBundleProduct')->find($id);
+
+            if(!$product) {
+                throw $this->createNotFoundException(
+                    'No product found for id '.$id
+                );
+            }
+            $product->remove($product);
+            $em->flush();
+
+            return $this->render('homepage');
     }
-}
+    }
+
+
