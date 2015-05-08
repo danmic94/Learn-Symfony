@@ -54,3 +54,8 @@ show_entry:
 datetime_callback:
      path: /created
      defaults: { _controller: AppBundle:Default:createdAt}
+
+# src/AppBundle/Controller/Default/authorAction
+validation:
+    path: /isvalid
+    defaults: { _controller: AppBundle:Default:author}
