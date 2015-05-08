@@ -9,6 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\ProductRepository")
+ * @ORM\Entity()
+ * @ORM\HasLifecycleCallbacks()
  */
 class Product
 {
@@ -41,6 +43,15 @@ class Product
      * @ORM\Column(name="description", type="text")
      */
     private $description;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="createdAt", type="date")
+     */
+    private $CreatedAt;
+
 
 
     /**
@@ -120,5 +131,49 @@ class Product
     public function getDescription()
     {
         return $this->description;
+    }
+
+    // src/AppBundle/Entity/Product.php
+    /**
+     * @ORM\PrePersist
+     */
+//    public function setcreatedAt()
+//    {
+////        $timezone=new \DateTimeZone('UTC');
+//        $this->createdAt = new \DateTime('now');
+//
+//    }
+//
+//    /**
+//     * Get CreatedAtValue
+//     *
+//     * @return \DateTime
+//     */
+//    public function getcreatedAt()
+//    {
+//        return $this->createdAt;
+//    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Product
+     */
+    public function setCreatedAt($CreatedAt)
+    {
+        $this->CreatedAt = $CreatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 }

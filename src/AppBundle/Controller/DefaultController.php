@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Category;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Product;
@@ -37,19 +38,19 @@ class DefaultController extends Controller
     }
         public function showAction($id)
         {
-            $id = intval($id);
-            $repository = $this->getDoctrine()->getRepository('AppBundle:Product');
-            $product = $repository->find($id);
+            $product = $this->getDoctrine()
+                ->getRepository('AppBundle:Product')
+                ->findOneByIdJoinedToCategory($id);
+
+            $category = $product->getCategory();
 
             if (isset($product) === FALSE) {
-                return $this->render('dbactions/error.html.twig', array(
-                    'product' => $product
-                ));
+                return $this->render('dbactions/error.html.twig');
             }
 
                 return $this->render('dbactions/index.html.twig', array(
-                    'product' => $product
-            ));
+                    'product' => $product,
+                ));
         }
 
         public function updateAction($id)
@@ -82,7 +83,40 @@ class DefaultController extends Controller
             $em->flush();
 
             return $this->render('homepage');
-    }
-    }
+        }
+
+        //Generateing a row in th Database
+        public function createProductAction()
+        {
+            $category = new Category();
+            $category->setName('Main Products');
+
+            $product = new Product();
+            $product->setName('Foo');
+            $product->setPrice(21);
+            $product->setDescription('Lorem ipsum dolor');
+            //relate this product to the category
+            $product->setCategory($category);
+            $product->setCreatedAt(new \DateTime('now','UTC'));
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($category);
+            $em->persist($product);
+            $em->flush();
+
+            return new Response(
+                    'Created product id: '.$product->getId()
+                    .' and category id: '.$category->getId()
+            );
+        }
+        public function createdAtAction()
+        {
+            $product= new Product();
+            $product->setCreatedAtValue();
+            $response=$product->getCreatedAtValue();
+
+            return new Response('Produsul este: '.$response);
+        }
+}
 
 
