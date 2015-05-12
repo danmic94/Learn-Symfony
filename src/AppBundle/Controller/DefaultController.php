@@ -6,6 +6,7 @@ use AppBundle\Entity\Category;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Product;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\Author;
 
@@ -55,7 +56,7 @@ class DefaultController extends Controller
         ));
     }
 
-    public function updateAction($id)
+    public function upAction($id)
     {
         $em = $this->getDoctrine()->getManager();
         $product = $em->getRepository('AppBundleProduct')->find($id);
@@ -137,6 +138,23 @@ class DefaultController extends Controller
 
         return new Response('The author is valid! Yes!: <h1>'.$name.'</h1>');
 
+    }
+
+    public function updateAction(Request $request)
+    {
+        $author = new Author();
+        $form = $this->createForm(new Author(), $author);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            // the validation passed, do something with the $author object
+            return $this->redirectToRoute('name');
+        }
+
+        return $this->render('author/form.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
 }
 

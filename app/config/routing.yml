@@ -31,7 +31,7 @@ name:
     defaults: { _controller: AdittionBundle:Adittion:name}
 
 # app/config/routing.yml
-_welcome:
+welcome:
     path: /
     defaults: { _controller: AppBundle:Welcome:index}
 
@@ -59,3 +59,4 @@ datetime_callback:
 validation:
     path: /isvalid
     defaults: { _controller: AppBundle:Default:author}
+

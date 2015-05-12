@@ -71,3 +71,8 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+# The Symfony validator is enabled by default, but you must explicitly enable annotations if you're using
+# the annotation method to specify your constraints
+framework:
+    validation: { enable_annotations: true }
