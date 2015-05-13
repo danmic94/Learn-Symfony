@@ -194,6 +194,12 @@ class DefaultController extends Controller
 
         $form->handleRequest($request);
 
+    //    Validation Groups :D
+    //    $form = $this->createFormBuilder($users, array(
+    //        'validation_groups' => array('registration'),
+    //    ))->add(...);
+
+
         if ($form->isValid()) {
         // perform some action, such as saving the task to the database
             return $this->redirectToRoute('task_success');
