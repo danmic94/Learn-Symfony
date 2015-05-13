@@ -60,3 +60,7 @@ validation:
     path: /isvalid
     defaults: { _controller: AppBundle:Default:author}
 
+# a sexy form from /AppBundle/Controller/Default/newAction
+form:
+  path: /form
+  defaults: { _controller: AppBundle:Default:new}

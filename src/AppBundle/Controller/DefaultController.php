@@ -3,12 +3,14 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Category;
+use AppBundle\Entity\Task;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Product;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\Author;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 class DefaultController extends Controller
@@ -153,6 +155,51 @@ class DefaultController extends Controller
         }
 
         return $this->render('author/form.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
+    public function addEmailAction($email)
+    {
+        $emailConstraint = new Assert\Email();
+        // all constraint "options" can be set this way
+        $emailConstraint->message = "Invalid email address";
+
+        // use the validator to validate the value
+        // If you're using the new 2.5 validation API (you probably are!)
+        $errorList = $this->get('validator')->validate(
+            $email,
+            $emailConstraint
+        );
+        if (0 === count($errorList)) {
+        // ... this IS a valid email address, do something
+        } else {
+        // this is *not* a valid email address
+            $errorMessage = $errorList[0]->getMessage();
+        // ... do something with the error
+        }
+        // ...
+    }
+
+    public function newAction(Request $request)
+    {
+        // just setup a fresh $task object (remove the dummy data)
+        $task = new Task();
+        $form = $this->createFormBuilder($task)
+            ->add('task', 'text')
+            ->add('dueDate', 'date')
+            ->add('save', 'submit', array('label' => 'Create Task'))
+            ->add('saveAndAdd', 'submit', array('label' => 'Save and Add'))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+        // perform some action, such as saving the task to the database
+            return $this->redirectToRoute('task_success');
+        }
+
+        return $this->render('default/new.html.twig', array(
             'form' => $form->createView(),
         ));
     }
