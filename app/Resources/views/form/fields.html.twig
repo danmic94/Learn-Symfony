@@ -1,0 +1,15 @@
+{# app/Resources/views/default/new.html.twig #}
+{% form_theme form 'form/fields.html.twig' %}
+
+{% form_theme form 'form/fields.html.twig' 'form/fields2.html.twig' %}
+
+{# ... render the form #}
+{% block form_row %}
+    {% spaceless %}
+        <div class="form_row">
+            {{ form_label(form) }}
+            {{ form_errors(form) }}
+            {{ form_widget(form) }}
+        </div>
+    {% endspaceless %}
+{% endblock form_row %}

@@ -61,6 +61,11 @@ validation:
     defaults: { _controller: AppBundle:Default:author}
 
 # a sexy form from /AppBundle/Controller/Default/newAction
-form:
-  path: /form
-  defaults: { _controller: AppBundle:Default:new}
+admin:
+  path: /admin
+  defaults: { _controller: AppBundle:Default:admin}
+
+# a denied fuction for users
+hi:
+  path: /denied/{name}
+  defaults: { _controller: AppBundle:Default:hi}
